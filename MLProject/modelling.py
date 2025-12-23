@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+import mlflow
+import mlflow.sklearn
 
 DataDf = pd.read_csv("Employee_preprocessing.csv")
 
@@ -15,10 +17,13 @@ XTrain, XTest, YTrain, YTest = train_test_split(
     random_state=42
 )
 
-Model = RandomForestClassifier(random_state=42)
-Model.fit(XTrain, YTrain)
+mlflow.sklearn.autolog()
 
-Predictions = Model.predict(XTest)
-Accuracy = accuracy_score(YTest, Predictions)
+with mlflow.start_run():
+    Model = RandomForestClassifier(random_state=42)
+    Model.fit(XTrain, YTrain)
 
-print(f"Training selesai. Accuracy: {Accuracy:.4f}")
+    Predictions = Model.predict(XTest)
+    Accuracy = accuracy_score(YTest, Predictions)
+
+    print(f"Training selesai. Accuracy: {Accuracy:.4f}")
