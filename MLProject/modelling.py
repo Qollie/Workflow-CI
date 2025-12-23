@@ -19,11 +19,10 @@ XTrain, XTest, YTrain, YTest = train_test_split(
 
 mlflow.sklearn.autolog()
 
-with mlflow.start_run():
-    Model = RandomForestClassifier(random_state=42)
-    Model.fit(XTrain, YTrain)
+Model = RandomForestClassifier(random_state=42)
+Model.fit(XTrain, YTrain)
 
-    Predictions = Model.predict(XTest)
-    Accuracy = accuracy_score(YTest, Predictions)
+Predictions = Model.predict(XTest)
+Accuracy = accuracy_score(YTest, Predictions)
 
-    print(f"Training selesai. Accuracy: {Accuracy:.4f}")
+print(f"Training selesai. Accuracy: {Accuracy:.4f}")
