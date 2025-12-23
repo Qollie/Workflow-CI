@@ -1,6 +1,6 @@
 name: employee-paymenttier-ci
 
-conda_env: conda.yaml
+python_env: conda.yaml
 
 entry_points:
   main:
